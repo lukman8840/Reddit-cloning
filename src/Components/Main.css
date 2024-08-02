@@ -1,0 +1,175 @@
+.main {
+    padding: 20px;
+    background-color: black;
+    height: 100vh;
+    margin: 0px;
+    overflow-y: scroll;
+}
+  .header-btn {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 0px;
+} 
+  .header-btn button {
+    color: white;
+    border: none;
+    width: 100px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+} 
+  .header-btn button:hover {
+    background-color: #333;
+    border-radius: 20px;
+}
+  .header-btn button svg {
+    margin-left: 10px;
+    align-items: center;
+    font-size: 14px;
+    justify-content: center;
+    text-align: center;
+}
+  .hr{
+    width: 65%;
+    border: 1px solid #333;
+    margin-left: 0px;
+}
+.content-header{
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+.paragraph{
+    margin: 5px;
+    color: #fff;
+    font-size: 12px;
+}
+.time{
+    color: #fff;
+    margin: 5px;
+    font-size: 12px;
+}
+.content-main{
+    width: 700px;
+}
+.content-main h1{
+    color: #fff;
+    font-size: 24px;
+    margin: 15px;
+}
+.text{
+    color: #6b6a6a;
+}
+.footer-btn{
+    display: flex;
+    width: 300px;
+}
+
+
+@media (max-width: 1024px) {
+    .main {
+        padding: 15px;
+    }
+
+    .content-main {
+        width: 90%; /* Adjust width to fit smaller screens */
+    }
+
+    .content-main h1 {
+        font-size: 20px; /* Reduce font size of h1 */
+    }
+
+    .header-btn button {
+        width: 80px; /* Reduce button width */
+        padding: 8px 4px; /* Adjust padding */
+    }
+
+    .header-btn button svg {
+        font-size: 12px; /* Reduce icon size */
+    }
+
+    .hr {
+        width: 80%; /* Adjust width */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .main {
+        padding: 10px;
+        height: auto; /* Allow content to adjust height */
+    }
+
+    .header-btn {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+
+    .header-btn button {
+        width: 100%; /* Full width buttons */
+        padding: 8px 10px; /* Adjust padding */
+        margin-bottom: 5px; /* Space between buttons */
+    }
+
+    .header-btn button svg {
+        font-size: 16px; /* Adjust icon size */
+    }
+
+    .hr {
+        width: 90%; /* Adjust width */
+    }
+
+    .content-main {
+        width: 100%; /* Full width */
+    }
+
+    .content-main h1 {
+        font-size: 18px; /* Reduce font size */
+    }
+
+    .paragraph, .time {
+        font-size: 14px; /* Adjust font size */
+    }
+
+    .footer-btn {
+        width: 100%; /* Full width footer buttons */
+        flex-direction: column; /* Stack buttons vertically */
+    }
+}
+
+/* For very small mobile devices */
+@media (max-width: 480px) {
+    .main {
+        padding: 5px;
+    }
+
+    .header-btn button {
+        width: 100%; /* Full width buttons */
+        padding: 5px; /* Adjust padding */
+    }
+
+    .header-btn button svg {
+        font-size: 14px; /* Adjust icon size */
+    }
+
+    .hr {
+        width: 100%; /* Full width */
+    }
+
+    .content-main {
+        width: 100%; /* Full width */
+    }
+
+    .content-main h1 {
+        font-size: 16px; /* Further reduce font size */
+    }
+
+    .paragraph, .time {
+        font-size: 12px; /* Further adjust font size */
+    }
+
+    .footer-btn {
+        width: 100%; /* Full width footer buttons */
+    }
+}

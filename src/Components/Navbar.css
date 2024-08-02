@@ -1,0 +1,99 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    color: #fff;
+}
+img{
+    width: 50px;
+    height: 50px;
+    background-color: none;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    margin-right: 10px;
+}
+.navbar-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+.navbar-search {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    border-radius: 14px;
+    padding: 5px 10px;
+}
+.navbar-search-icon {
+    font-size: 20px;
+    margin-right: 0px;
+    background-color: #333;
+}
+.navbar-search-input {
+    padding: 8px;
+    width: 550px;
+    border: none;
+    background: none;
+    color: #fff;
+    outline: none;
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-right: 0px;
+  
+}
+.navbar-icon {
+    width: 35px;
+    padding: -10px 25px;
+    border-radius: 0px;
+    margin: 5px;
+    font-size: 35px;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background color and box-shadow */
+}
+.navbar-icon:hover {
+  
+    background-color: #333; /* Change background color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Create a shadow effect to simulate the background change */
+}
+
+.btn{
+    background-color: none;
+    padding: 5px 0px;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    font-size: 18px;
+    border: none;
+}
+.btn:hover{
+    background-color: #333;
+    padding: 12em -0.9em;
+    width: 100%;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;   
+}
+
+.plus{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    background-color: none;
+}
