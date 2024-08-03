@@ -11,9 +11,11 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                {/* <FaReddit className="navbar-logo" /> */}
                 <img src='assets/icon.jpg' />
+                <div className='navbar-title-container'>
                 <span className="navbar-title">reddit</span>
+                <div className='tooltip'>Go back to reddit Home</div>
+                </div>
             </div>
             <div className="navbar-center">
                 <div className="navbar-search">
@@ -24,9 +26,13 @@ const Navbar = () => {
             <div className="navbar-right">
                 <MdAdsClick className='navbar-icon'/>
                 <AiOutlineMessage className='navbar-icon message'/>
-                <button className='btn'> <FaPlus className="navbar-icon plus" /> Create</button>
+                <p className='navbar-icon'>
+                  <FaPlus style={{ fontSize: '15px'}} />
+                    Create
+                    </p>
+
                 <FaRegBell className='navbar-icon'/>
-                <FaUserCircle className="navbar-icon" />
+                <FaUserCircle className="navbar-icon user" />
             </div>
         </nav>
     );

@@ -7,20 +7,27 @@ import { FaRegMessage } from "react-icons/fa6";
 import { RiShareForwardLine } from "react-icons/ri";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { FiCreditCard } from "react-icons/fi";
+import { FaRegRectangleList } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosLink } from "react-icons/io";
+import { TbArrowsSplit } from "react-icons/tb";
+import { IoIosCheckboxOutline } from "react-icons/io";
 
 const lorem = new LoremIpsum();
 
 const MainSection = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [text, setText] = useState('');
+  const [activeButton, setActiveButton] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('Best');
+  const [voteCount, setVoteCount] = useState(0);
+  const [lastClickedArrow, setLastClickedArrow] = useState(null);
 
   useEffect(() => {
     const generatedText = lorem.generateParagraphs(2);
     setText(generatedText);
   }, []);
-
-  const [activeButton, setActiveButton] = useState(null);
 
   const handleClick = (button) => () => {
     setActiveButton(button === activeButton ? null : button);
@@ -32,6 +39,22 @@ const MainSection = () => {
 
   const handleMouseLeave = () => {
     setHoveredButton(null);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option)
+    setActiveButton(null)
+  };
+
+  const incrementVote = () => {
+    setVoteCount(voteCount + 1);
+    setLastClickedArrow('up');
+  };
+
+  const decrementVote = (event) => {
+    event.stopPropagation();
+    setVoteCount(voteCount - 1);
+    setLastClickedArrow('down');
   };
 
   const buttonStyle = (button) => ({
@@ -55,9 +78,26 @@ const MainSection = () => {
         <button onClick={handleClick('Best')}>
           Best {activeButton === 'Best' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
+        {activeButton === 'Best' && (
+          <div className='dropdown-header'>
+              <p onClick={() => setActiveButton('Best')}>Sort By</p>
+              <p onClick={() => setActiveButton('Best')}>Best</p>
+              <p onClick={() => setActiveButton('Hot')}>Hot</p>
+              <p onClick={() => setActiveButton('New')}>New</p>
+              <p onClick={() => setActiveButton('Top')}>Top</p>
+              <p onClick={() => setActiveButton('Rising')}>Rising</p>
+          </div>
+        )}
         <button onClick={handleClick('Box')}>
           <MdOutlineViewWeek />
           {activeButton === 'Box' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          {activeButton === 'Box' && (
+            <div className='dropdown-header-2'>
+              <h4 onClick={() => setActiveButton('view')} >View</h4>
+              <p onClick={() => setActiveButton('card')}> <FiCreditCard /> Card</p>
+              <p onClick={() => setActiveButton('compact')}> <FaRegRectangleList /> Compact</p>
+            </div>
+          )}
         </button>
       </div>
       <hr className='hr' />
@@ -83,17 +123,20 @@ const MainSection = () => {
           style={buttonStyle('vote')}
           onMouseEnter={() => handleMouseEnter('vote')}
           onMouseLeave={handleMouseLeave}
+          onClick={incrementVote}
         >
-          <TiArrowUpOutline style={{ 
-            fontSize: '20px' 
+          <TiArrowUpOutline style= {{ 
+            fontSize: '20px',
+            
           }} 
         />
           <span style={{ 
             marginLeft: '5px', 
             marginRight: '5px' 
-            }}>100</span>
+            }}>{voteCount}</span>
           <TiArrowDownOutline style={{ 
             fontSize: '20px' }}
+            onClick={decrementVote}
         />
         </button>
         <button
@@ -106,7 +149,7 @@ const MainSection = () => {
             fontSize: '16px', 
             margin: '5px' 
             }} 
-        /> 100 
+        /> 10 
         </button>
         <button
           className='comments'
@@ -121,6 +164,7 @@ const MainSection = () => {
           style={buttonStyle('share')}
           onMouseEnter={() => handleMouseEnter('share')}
           onMouseLeave={handleMouseLeave}
+          onClick={handleClick('share')}
         >
           <RiShareForwardLine style={{ 
             fontSize: '20px', 
@@ -133,6 +177,14 @@ const MainSection = () => {
         <hr style={{
           margin: '10px',
         }}/>
+        {activeButton === 'share' && (
+          <div className='dropdown-header-3'>
+            <h4>Share this Post on</h4>
+              <p onClick={() => setActiveButton('copy link')}> <IoIosLink /> Copy link</p>
+              <p onClick={() => setActiveButton('crosspost')}> <TbArrowsSplit /> Crosspost</p>
+              <p onClick={() => setActiveButton('embed')}> <IoIosCheckboxOutline /> Embed</p>
+          </div>
+        )}
       <div className='main-content'>
         <div className='content-header'>
           <img src='assets/header.jpeg' alt='Header' />
@@ -165,13 +217,15 @@ const MainSection = () => {
           <TiArrowUpOutline style={{ 
             fontSize: '20px' 
           }} 
+          onClick={incrementVote}
         />
           <span style={{ 
             marginLeft: '5px', 
             marginRight: '5px' 
-            }}>100</span>
+            }}>{voteCount}</span>
           <TiArrowDownOutline style={{ 
             fontSize: '20px' }}
+            onClick={decrementVote}
         />
         </button>
         <button
@@ -199,6 +253,7 @@ const MainSection = () => {
           style={buttonStyle('share')}
           onMouseEnter={() => handleMouseEnter('share')}
           onMouseLeave={handleMouseLeave}
+          onClick={handleClick('share')}
         >
           <RiShareForwardLine style={{ 
             fontSize: '20px', 
@@ -208,6 +263,17 @@ const MainSection = () => {
           share
         </button>
       </div>
+      <hr style={{
+          margin: '10px',
+        }}/>
+        {activeButton === 'share' && (
+          <div className='dropdown-header-3'>
+            <h4>Share this Post on</h4>
+              <p onClick={() => setActiveButton('copy link')}> <IoIosLink /> Copy link</p>
+              <p onClick={() => setActiveButton('crosspost')}> <TbArrowsSplit /> Crosspost</p>
+              <p onClick={() => setActiveButton('embed')}> <IoIosCheckboxOutline /> Embed</p>
+          </div>
+        )}
     </div>
   );
 };

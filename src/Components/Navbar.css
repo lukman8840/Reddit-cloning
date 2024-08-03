@@ -5,7 +5,8 @@
     padding: 12px 20px;
     color: #fff;
 }
-img{
+
+img {
     width: 50px;
     height: 50px;
     background-color: none;
@@ -16,14 +17,43 @@ img{
 .navbar-left {
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+.navbar-title-container {
+    position: relative;
+    display: inline-block;
 }
 
+.tooltip {
+    visibility: hidden;
+    width: auto;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    left: 100%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    white-space: nowrap; 
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.3s
+}
+
+.navbar-title-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1; 
+}
 .navbar-logo {
     font-size: 24px;
     margin-right: 10px;
+    cursor: pointer;
 }
 .navbar-title {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
 .navbar-center {
@@ -54,46 +84,24 @@ img{
 .navbar-right {
     display: flex;
     align-items: center;
-    margin-right: 0px;
-  
-}
-.navbar-icon {
-    width: 35px;
-    padding: -10px 25px;
-    border-radius: 0px;
-    margin: 5px;
-    font-size: 35px;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background color and box-shadow */
+    
 }
 .navbar-icon:hover {
-  
-    background-color: #333; /* Change background color on hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Create a shadow effect to simulate the background change */
-}
-
-.btn{
-    background-color: none;
-    padding: 5px 0px;
-    justify-content: center;
-    align-items: center;
-    text-align: justify;
-    font-size: 18px;
-    border: none;
-}
-.btn:hover{
+    border-radius: 10px;
     background-color: #333;
-    padding: 12em -0.9em;
-    width: 100%;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    text-align: justify;   
 }
-
-.plus{
+.navbar-icon { 
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin: 6px;  
+    display: flex;
+    align-items: center;
+  
+}
+.navbar-right p {
+    justify-content: center;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    font-size: 15px;
-    background-color: none;
+    width: 100%;
 }

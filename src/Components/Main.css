@@ -66,8 +66,99 @@
     display: flex;
     width: 300px;
 }
+.dropdown-header{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; 
+    position: absolute;
+    top: 20%;
+    margin-left: 40px;
+    width: 65px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    height: 220px;
+    background-color: #333;
+}
+.dropdown-header p {
+    margin: 2px;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-top: 3px;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.dropdown-header p:hover {
+    background-color: #777;
+} 
 
+.dropdown-header-2{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; 
+    position: absolute;
+    top: 20%;
+    margin-left: 40px;
+    width: 100px;
+    justify-content: space-around;
+    border-radius: 5px;
+    height: 120px;
+    background-color: #333;
+}
+.dropdown-header-2 p{
+    margin: 2px;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-top: 3px;
+    border-radius: 5px;
+    cursor: pointer
+}
+.dropdown-header-2 h4{
+    text-align: justify;
+    align-items: start;
+    margin: 5px;
+    justify-content: flex-start;
+}
+.dropdown-header-2 p:hover{
+    background-color: #777;
+}
 
+.dropdown-header-3{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; 
+    position: absolute;
+    top: 68%;
+    margin-left: 250px;
+    width: 140px;
+    justify-content: space-around;
+    border-radius: 5px;
+    height: 140px;
+    background-color: #333;
+}
+
+.dropdown-header-3 p{
+    margin: 2px;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-top: 3px;
+    border-radius: 5px;
+    cursor: pointer
+}
+.dropdown-header-3 h4{
+    text-align: justify;
+    align-items: start;
+    margin: 5px;
+    color: #fff;
+    justify-content: flex-start;
+}
+
+.dropdown-header-3 p:hover{
+    background-color: #777;
+}
 @media (max-width: 1024px) {
     .main {
         padding: 15px;
