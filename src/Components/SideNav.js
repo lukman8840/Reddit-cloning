@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SideNav.css';
+import CustomFeed from './CustomFeed'
 import { TiHome, TiStar, TiCompass, TiThList } from 'react-icons/ti';
 import { IoIosArrowDown, IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
@@ -8,6 +9,7 @@ import { FaAward, FaBlogger, FaBriefcase, FaBullhorn, FaFileAlt, FaLock, FaFileC
 const SideNav = () => {
     const [activeButton, setActiveButton] = useState(null);
     const [isSideNavVisible, setSideNavVisible] = useState(false);
+    const [showCustomFeed, setShowCustomFeed] = useState(false)
 
     const handleClick = (button) => () => {
         setActiveButton(button === activeButton ? null : button);
@@ -16,6 +18,10 @@ const SideNav = () => {
     const toggleSideNav = () => {
         setSideNavVisible(!isSideNavVisible);
     };
+
+    const handleCreateFeedClick = () => {
+        setShowCustomFeed(true);
+    }
 
     const buttonStyle = {
         maxWidth: '200px',
@@ -56,13 +62,14 @@ const SideNav = () => {
                         </button>
                         {activeButton === 'customFeed' && (
                             <ul className='dropdown-content'>
-                                <button style={buttonStyle}>
+                                <button style={buttonStyle} onClick={handleCreateFeedClick}>
                                     <GoPlus style={{ marginRight: '5px', fontSize: '22px' }} />
                                     Create a Custom Feed
                                 </button>
                             </ul>
                         )}
                         <hr />
+                       
                         <button onClick={handleClick('communities')}>
                             Communities {activeButton === 'communities' ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>

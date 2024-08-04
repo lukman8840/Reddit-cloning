@@ -10,13 +10,16 @@ import { FiCreditCard } from "react-icons/fi";
 import { FaRegRectangleList } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLink, IoIosCheckboxOutline } from "react-icons/io";
 import { TbArrowsSplit } from "react-icons/tb";
+import CustomFeed from './CustomFeed';
 
 const MainSection = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [activeButton, setActiveButton] = useState(null);
+  const [activeSharePost, setActiveSharePost] = useState(null);
   const [selectedOption, setSelectedOption] = useState('Best');
   const [voteCounts, setVoteCounts] = useState({});
+  const [showCustomFeed, setShowCustomFeed] = useState(false)
+
 
   useEffect(() => {
     // Fetch posts from Reddit API
@@ -35,8 +38,9 @@ const MainSection = () => {
       });
   }, []);
 
-  const handleClick = (button) => () => {
-    setActiveButton(button === activeButton ? null : button);
+  const handleClick = (postId) => (event) => {
+    event.stopPropagation();
+    setActiveSharePost(postId === activeSharePost ? null : postId);
   };
 
   const handleMouseEnter = (button) => {
@@ -48,8 +52,8 @@ const MainSection = () => {
   };
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option)
-    setActiveButton(null)
+    setSelectedOption(option);
+    setActiveSharePost(null);
   };
 
   const incrementVote = (postId) => {
@@ -66,6 +70,23 @@ const MainSection = () => {
       [postId]: prevVoteCounts[postId] - 1
     }));
   };
+
+  const handleOutsideClick = (event) => {
+    if (!event.target.closest('.post')) {
+      setActiveSharePost(null);
+    }
+  };
+
+  const handleCloseFeedClick = () => {
+    setShowCustomFeed(false);
+}
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   const buttonStyle = (button) => ({
     width: '100px',
@@ -84,28 +105,29 @@ const MainSection = () => {
 
   return (
     <div className='main'>
+       {showCustomFeed && <CustomFeed onClick={handleCloseFeedClick}/>}
       <div className='header-btn'>
-        <button onClick={handleClick('Best')}>
-          Best {activeButton === 'Best' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        <button onClick={() => handleOptionClick('Best')}>
+          Best {selectedOption === 'Best' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
-        {activeButton === 'Best' && (
+        {selectedOption === 'Best' && (
           <div className='dropdown-header'>
-              <p onClick={() => setActiveButton('Best')}>Sort By</p>
-              <p onClick={() => setActiveButton('Best')}>Best</p>
-              <p onClick={() => setActiveButton('Hot')}>Hot</p>
-              <p onClick={() => setActiveButton('New')}>New</p>
-              <p onClick={() => setActiveButton('Top')}>Top</p>
-              <p onClick={() => setActiveButton('Rising')}>Rising</p>
+              <p onClick={() => handleOptionClick('Best')}>Sort By</p>
+              <p onClick={() => handleOptionClick('Best')}>Best</p>
+              <p onClick={() => handleOptionClick('Hot')}>Hot</p>
+              <p onClick={() => handleOptionClick('New')}>New</p>
+              <p onClick={() => handleOptionClick('Top')}>Top</p>
+              <p onClick={() => handleOptionClick('Rising')}>Rising</p>
           </div>
         )}
-        <button onClick={handleClick('Box')}>
+        <button onClick={() => handleOptionClick('Box')}>
           <MdOutlineViewWeek />
-          {activeButton === 'Box' ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          {activeButton === 'Box' && (
+          {selectedOption === 'Box' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          {selectedOption === 'Box' && (
             <div className='dropdown-header-2'>
-              <h4 onClick={() => setActiveButton('view')} >View</h4>
-              <p onClick={() => setActiveButton('card')}> <FiCreditCard /> Card</p>
-              <p onClick={() => setActiveButton('compact')}> <FaRegRectangleList /> Compact</p>
+              <h4 onClick={() => handleOptionClick('view')}>View</h4>
+              <p onClick={() => handleOptionClick('card')}> <FiCreditCard /> Card</p>
+              <p onClick={() => handleOptionClick('compact')}> <FaRegRectangleList /> Compact</p>
             </div>
           )}
         </button>
@@ -161,18 +183,18 @@ const MainSection = () => {
                 style={buttonStyle('share')}
                 onMouseEnter={() => handleMouseEnter('share')}
                 onMouseLeave={handleMouseLeave}
-                onClick={handleClick('share')}
+                onClick={handleClick(post.id)}
               >
                 <RiShareForwardLine style={{ fontSize: '20px', margin: '5px' }} /> share
               </button>
             </div>
             <hr style={{ margin: '10px' }}/>
-            {activeButton === 'share' && (
+            {activeSharePost === post.id && (
               <div className='dropdown-header-3'>
                 <h4>Share this Post on</h4>
-                <p onClick={() => setActiveButton('copy link')}> <IoIosLink /> Copy link</p>
-                <p onClick={() => setActiveButton('crosspost')}> <TbArrowsSplit /> Crosspost</p>
-                <p onClick={() => setActiveButton('embed')}> <IoIosCheckboxOutline /> Embed</p>
+                <p onClick={() => setActiveSharePost(null)}> <IoIosLink /> Copy link</p>
+                <p onClick={() => setActiveSharePost(null)}> <TbArrowsSplit /> Crosspost</p>
+                <p onClick={() => setActiveSharePost(null)}> <IoIosCheckboxOutline /> Embed</p>
               </div>
             )}
           </div>
