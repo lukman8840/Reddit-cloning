@@ -12,7 +12,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { TbPremiumRights } from "react-icons/tb";
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CreatePost from './CreatePost'; // Import the CreatePost component
+import CreatePost from './CreatePost'; 
 
 const Navbar = () => {
     const [isCartVisible, setIsCartVisible] = useState(false);
@@ -52,8 +52,12 @@ const Navbar = () => {
                     <AiOutlineMessage className='navbar-icon message'/>
                     <p className='navbar-icon' onClick={handleCreatePostClick}>
                         <FaPlus style={{ fontSize: '15px'}} />
-                        Create
+                        <span style={{
+                            fontSize: '20px',
+                            margin: '5px'
+                        }}> Create</span>
                     </p>
+                   
                     <FaRegBell className='navbar-icon'/>
                     <FaUserCircle className="navbar-icon user" onClick={handleProfileClick} />
                     <FontAwesomeIcon 
