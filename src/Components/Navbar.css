@@ -87,13 +87,14 @@ img {
     cursor: pointer;
 }
 .navbar-icon:hover {
+   
     border-radius: 10px;
     background-color: #333;
 }
 .navbar-icon { 
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 25px;
     margin: 6px;  
     display: flex;
     align-items: center;
@@ -103,23 +104,23 @@ img {
     justify-content: center;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 50%;
 }
 .user{
     padding: 0px;
     font-size: 40px;
     cursor: pointer;
 }
-/* Navbar.css */
+
 .cart-dropdown {
     background-color: #333;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 50px; /* Adjust based on your layout */
-    right: 0;  /* Adjust based on your layout */
-    width: 250px; /* Adjust based on your layout */
+    top: 50px; 
+    right: 0;  
+    width: 250px; 
     z-index: 1000;
   }
   
