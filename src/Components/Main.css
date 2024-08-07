@@ -72,13 +72,11 @@
     margin-top: 10px; 
     position: absolute;
     top: 20%;
-    margin-left: 40px;
-    width: 65px;
-    justify-content: center;
-    align-items: center;
+    width: 75px;
     border-radius: 5px;
     height: 220px;
     background-color: #333;
+    z-index: 5;
 }
 .dropdown-header p {
     margin: 2px;
@@ -88,10 +86,8 @@
     margin-top: 3px;
     border-radius: 5px;
     cursor: pointer; 
+    text-align: justify;
 }
-.dropdown-header p:hover {
-    background-color: #777;
-} 
 
 .dropdown-header-2{
     display: flex;
@@ -99,13 +95,14 @@
     margin-top: 10px; 
     position: absolute;
     top: 20%;
-    margin-left: 40px;
     width: 100px;
     justify-content: space-around;
     border-radius: 5px;
     height: 120px;
     background-color: #333;
+    z-index: 5;
 }
+
 .dropdown-header-2 p{
     margin: 2px;
     color: white;
@@ -121,13 +118,39 @@
     margin: 5px;
     justify-content: flex-start;
 }
-.dropdown-header-2 p:hover{
-    background-color: #777;
-}
+
 .post{
+    max-width: 740px;
     position: relative;
 }
+.icon-hover{
+    color: #fff;
+     cursor: pointer;
+    text-align: end;
+    margin-left: 300px;
+    background-color: 'red'
+}
 
+.icon-dropdown{
+    position: absolute;
+    top: 20%;
+    left: 85%;
+    width: 120px;
+    height: 100px;
+    margin: 10px;
+    background-color: #333;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+.icon-dropdown p{
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+}
 .dropdown-header-3{
     position: absolute;
     bottom: -130px;
@@ -136,8 +159,7 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  
+    z-index: 1000; 
 }
 
 .dropdown-header-3 p{
@@ -156,112 +178,65 @@
     color: #fff;
     justify-content: flex-start;
 }
-
 .dropdown-header-3 p:hover{
     background-color: #777;
 }
-@media (max-width: 1024px) {
-    .main {
-        padding: 15px;
-    }
 
-    .content-main {
-        width: 90%; /* Adjust width to fit smaller screens */
-    }
 
-    .content-main h1 {
-        font-size: 20px; /* Reduce font size of h1 */
-    }
 
-    .header-btn button {
-        width: 80px; /* Reduce button width */
-        padding: 8px 4px; /* Adjust padding */
-    }
-
-    .header-btn button svg {
-        font-size: 12px; /* Reduce icon size */
-    }
-
-    .hr {
-        width: 80%; /* Adjust width */
-    }
-}
-
-/* For mobile devices */
 @media (max-width: 768px) {
     .main {
         padding: 10px;
-        height: auto; /* Allow content to adjust height */
+        height: auto;
+        overflow-y: auto;
     }
 
     .header-btn {
-        flex-direction: column; /* Stack buttons vertically */
+        flex-direction: row;
+        align-items: flex-start;
     }
 
     .header-btn button {
-        width: 100%; /* Full width buttons */
-        padding: 8px 10px; /* Adjust padding */
-        margin-bottom: 5px; /* Space between buttons */
-    }
-
-    .header-btn button svg {
-        font-size: 16px; /* Adjust icon size */
+        width: 80px;
+        padding: 8px 4px;
     }
 
     .hr {
-        width: 90%; /* Adjust width */
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .content-header {
+        flex-direction: row;
+        align-items: flex-start;
+        margin: 5px;
     }
 
     .content-main {
-        width: 100%; /* Full width */
+        width: 100%;
     }
 
     .content-main h1 {
-        font-size: 18px; /* Reduce font size */
-    }
-
-    .paragraph, .time {
-        font-size: 14px; /* Adjust font size */
+        font-size: 20px;
+        margin: 10px;
     }
 
     .footer-btn {
-        width: 100%; /* Full width footer buttons */
-        flex-direction: column; /* Stack buttons vertically */
-    }
-}
-
-/* For very small mobile devices */
-@media (max-width: 480px) {
-    .main {
-        padding: 5px;
+        width: 100%;
+        flex-direction: row;
     }
 
-    .header-btn button {
-        width: 100%; /* Full width buttons */
-        padding: 5px; /* Adjust padding */
+    .dropdown-header, .dropdown-header-2, .dropdown-header-3, .icon-dropdown {
+        width: 20%;
+        left: 0;
+        right: 0;
     }
 
-    .header-btn button svg {
-        font-size: 14px; /* Adjust icon size */
+    .post {
+        max-width: 100%;
     }
 
-    .hr {
-        width: 100%; /* Full width */
-    }
-
-    .content-main {
-        width: 100%; /* Full width */
-    }
-
-    .content-main h1 {
-        font-size: 16px; /* Further reduce font size */
-    }
-
-    .paragraph, .time {
-        font-size: 12px; /* Further adjust font size */
-    }
-
-    .footer-btn {
-        width: 100%; /* Full width footer buttons */
+    .icon-hover {
+        margin-left: 0;
     }
 }

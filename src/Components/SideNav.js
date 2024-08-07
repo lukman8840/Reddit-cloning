@@ -5,6 +5,8 @@ import { TiHome, TiStar, TiCompass, TiThList } from 'react-icons/ti';
 import { IoIosArrowDown, IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { FaAward, FaBlogger, FaBriefcase, FaBullhorn, FaFileAlt, FaLock, FaFileContract, FaUsers, FaInfoCircle, FaNewspaper, FaQuestionCircle, FaRegStar, FaTags } from 'react-icons/fa';
+import styled from 'styled-components';
+import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const SideNav = () => {
     const [activeButton, setActiveButton] = useState(null);
@@ -23,24 +25,40 @@ const SideNav = () => {
         setShowCustomFeed(true);
     }
 
-    const buttonStyle = {
-        maxWidth: '200px',
-        fontSize: '12px',
-        padding: '13px 0px',
-        marginRight: '20px',
-        cursor: 'pointer',
-        color: '#fff',
-        display: 'flex',
-        textTransform: 'capitalize',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '5px',
-        transition: 'background-color 0.3s, transform 0.3s',
-    };
+    // const buttonStyle = {
+    //     padding: '10px 5px',
+    //     boxSizing: 'border-box',
+    //     width: '100%',
+    //     border: 'none',
+    //     cursor: 'pointer',
+    //     textAlign: 'left',
+    //     fontSize: 'small',
+    //     textTransform: 'Capitalize',
+    //     margin: '6px auto'
+    // };
 
-    const iconStyle = {
-        fontSize: '18px',
-    };
+    // const iconStyle = {
+    //     fontSize: '18px',
+    // };
+
+    const Button = styled.button`
+        /* background:coral; */
+        padding:10px 5px;
+        box-sizing:border-box;
+        width:95%;
+        border:none;
+        margin:6px auto;
+        cursor: pointer;
+        text-align:left;
+        svg{
+    margin:0px 5px;
+    font-size:medium
+        };
+
+        &:hover{
+            background-color: '#333';
+        }
+    `
 
     return (
         <div style={{ backgroundColor: 'red' }}>
@@ -48,123 +66,135 @@ const SideNav = () => {
                 <IoIosMenu style={{ fontSize: '30px', color: 'white' }} />
             </button>
             <div className={`side-nav ${isSideNavVisible ? 'visible' : ''}`}>
-                <div className='sidenav-btn'>
-                    <button><TiHome /> Home</button>
-                    <button><TiStar /> Popular</button>
-                    <button><TiCompass /> Explore</button>
-                    <button><TiThList /> All</button>
+                <div className=''>
+                    <Button><TiHome /> Home</Button>
+                    <Button><TiStar /> Popular</Button>
+                    <Button><TiCompass /> Explore</Button>
+                    <Button><TiThList /> All</Button>
                 </div>
                 <hr />
                 <div className='drop-btn'>
                     <div className='dropdown'>
                         <button onClick={handleClick('customFeed')}>
-                            Custom Feed {activeButton === 'customFeed' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            CUSTOM FEED {activeButton === 'customFeed' ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
                         {activeButton === 'customFeed' && (
                             <ul className='dropdown-content'>
-                                <button style={buttonStyle} onClick={handleCreateFeedClick}>
-                                    <GoPlus style={{ marginRight: '5px', fontSize: '22px' }} />
+                                <Button  onClick={handleCreateFeedClick}>
+                                    <GoPlus style={{ 
+                                        marginRight: '0px',
+                                        fontSize: '20px',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: 'center'
+                                        }} />
                                     Create a Custom Feed
-                                </button>
+                                </Button>
                             </ul>
                         )}
                         <hr />
                        
                         <button onClick={handleClick('communities')}>
-                            Communities {activeButton === 'communities' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            COMMUNITIES {activeButton === 'communities' ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
                         {activeButton === 'communities' && (
                             <ul className='dropdown-content'>
-                                <button style={buttonStyle}>
+                                <button>
                                     <GoPlus style={{ marginRight: '5px', fontSize: '22px' }} />
                                     Create a Community
                                 </button>
-                                <button style={{ ...buttonStyle, textTransform: 'lowercase' }}>
+                                <Button style={{
+                                    width: '200px',
+                                    justifyContent: 'center',
+                                    alignItems: 'left',
+                                    marginLeft: '20px',
+                                    textTransform: 'capitalize'
+                                }}>
                                     r/CFB
-                                    <FaRegStar style={{ marginLeft: 'auto', fontSize: '16px' }} />
-                                </button>
+                                    <FaRegStar   />
+                                </Button>
                             </ul>
                         )}
                         <hr />
                         <button onClick={handleClick('resources')}>
-                            Resources {activeButton === 'resources' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            RESOURCES {activeButton === 'resources' ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
                         {activeButton === 'resources' && (
                             <ul className='dropdown-content'>
-                                <button style={buttonStyle}>
+                                <Button>
                                     <div className='resources'>
-                                        <FaInfoCircle style={iconStyle} />
-                                        About Reddit
+                                        <FaInfoCircle />
+                                         Reddit
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaBullhorn style={iconStyle} />
+                                        <FaBullhorn />
                                         Advertise
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaQuestionCircle style={iconStyle} />
+                                        <FaQuestionCircle />
                                         Help
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaBlogger style={iconStyle} />
+                                        <FaBlogger/>
                                         Blog
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaBriefcase style={iconStyle} />
+                                        <FaBriefcase />
                                         Careers
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button>
                                     <div className='resources'>
-                                        <FaNewspaper style={iconStyle} />
+                                        <FaNewspaper />
                                         Press
                                     </div>
-                                </button>
+                                </Button>
                                 <hr />
-                                <button style={buttonStyle}>
+                                <Button>
                                     <div className='resources'>
-                                        <FaUsers style={iconStyle} />
+                                        <FaUsers />
                                         Communities
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button>
                                     <div className='resources'>
-                                        <FaAward style={iconStyle} />
+                                        <FaAward />
                                         Best of Reddit
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button>
                                     <div className='resources'>
-                                        <FaTags style={iconStyle} />
+                                        <FaTags/>
                                         Topics
                                     </div>
-                                </button>
+                                </Button>
                                 <hr />
-                                <button style={buttonStyle}>
+                                <Button>
                                     <div className='resources'>
-                                        <FaFileAlt style={iconStyle} />
+                                        <FaFileAlt />
                                         Content Policy
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaLock style={iconStyle} />
+                                        <FaLock/>
                                         Privacy Policy
                                     </div>
-                                </button>
-                                <button style={buttonStyle}>
+                                </Button>
+                                <Button >
                                     <div className='resources'>
-                                        <FaFileContract style={iconStyle} />
+                                        <FaFileContract />
                                         User Agreement
                                     </div>
-                                </button>
+                                </Button>
                             </ul>
                         )}
                     </div>

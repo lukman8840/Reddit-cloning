@@ -8,18 +8,23 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FiCreditCard } from "react-icons/fi";
 import { FaRegRectangleList } from "react-icons/fa6";
+import { MdOutlineSaveAlt } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLink, IoIosCheckboxOutline } from "react-icons/io";
 import { TbArrowsSplit } from "react-icons/tb";
+import { VscReport } from "react-icons/vsc";
+import { GrHide } from "react-icons/gr";
 import CustomFeed from './CustomFeed';
+import CreatePost from './CreatePost';
 
 const MainSection = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [posts, setPosts] = useState([]);
   const [activeSharePost, setActiveSharePost] = useState(null);
-  const [selectedOption, setSelectedOption] = useState('Best');
+  const [selectedOption, setSelectedOption] = useState(false);
   const [voteCounts, setVoteCounts] = useState({});
-  const [showCustomFeed, setShowCustomFeed] = useState(false)
-
+  const [showCustomFeed, setShowCustomFeed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [clickedIconPostId, setClickedIconPostId] = useState(null);
 
   useEffect(() => {
     // Fetch posts from Reddit API
@@ -38,6 +43,10 @@ const MainSection = () => {
       });
   }, []);
 
+  const addPost = (newPost) => {
+    setPosts(prevPosts => [newPost, ...prevPosts]);
+  };
+
   const handleClick = (postId) => (event) => {
     event.stopPropagation();
     setActiveSharePost(postId === activeSharePost ? null : postId);
@@ -51,8 +60,8 @@ const MainSection = () => {
     setHoveredButton(null);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  const handleOptionClick = () => {
+    setSelectedOption(!selectedOption);
     setActiveSharePost(null);
   };
 
@@ -74,12 +83,17 @@ const MainSection = () => {
   const handleOutsideClick = (event) => {
     if (!event.target.closest('.post')) {
       setActiveSharePost(null);
+      setClickedIconPostId(null);
     }
   };
 
   const handleCloseFeedClick = () => {
     setShowCustomFeed(false);
-}
+  };
+
+  const handleIconClick = (postId) => {
+    setClickedIconPostId(clickedIconPostId === postId ? null : postId);
+  };
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
@@ -105,19 +119,20 @@ const MainSection = () => {
 
   return (
     <div className='main'>
-       {showCustomFeed && <CustomFeed onClick={handleCloseFeedClick}/>}
+      {showCustomFeed && <CustomFeed onClick={handleCloseFeedClick} />}
+      {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />}
       <div className='header-btn'>
-        <button onClick={() => handleOptionClick('Best')}>
-          Best {selectedOption === 'Best' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        <button onClick={handleOptionClick}>
+          Best {selectedOption === true ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
-        {selectedOption === 'Best' && (
+        {selectedOption === true && (
           <div className='dropdown-header'>
-              <p onClick={() => handleOptionClick('Best')}>Sort By</p>
-              <p onClick={() => handleOptionClick('Best')}>Best</p>
-              <p onClick={() => handleOptionClick('Hot')}>Hot</p>
-              <p onClick={() => handleOptionClick('New')}>New</p>
-              <p onClick={() => handleOptionClick('Top')}>Top</p>
-              <p onClick={() => handleOptionClick('Rising')}>Rising</p>
+            <p onClick={() => handleOptionClick('Best')}>Sort By</p>
+            <p onClick={() => handleOptionClick('Best')}>Best</p>
+            <p onClick={() => handleOptionClick('Hot')}>Hot</p>
+            <p onClick={() => handleOptionClick('New')}>New</p>
+            <p onClick={() => handleOptionClick('Top')}>Top</p>
+            <p onClick={() => handleOptionClick('Rising')}>Rising</p>
           </div>
         )}
         <button onClick={() => handleOptionClick('Box')}>
@@ -140,13 +155,11 @@ const MainSection = () => {
               <img src={post.thumbnail} alt='Header' />
               <p className='paragraph'>{post.title} &bull;</p>
               <span className='time'>{new Date(post.created_utc * 1000).toLocaleTimeString()}</span>
-              <HiOutlineDotsHorizontal style={{ 
-                color: '#fff',
-                cursor: 'pointer',
-                marginLeft: '450px'
-              }}/>
+              <HiOutlineDotsHorizontal
+                className='icon-hover'
+                onClick={() => handleIconClick(post.id)}
+              />
             </div>
-            
             <div className='content-main'>
               <h1>{post.title}</h1>
               <p className='text'>{post.selftext}</p>
@@ -188,13 +201,28 @@ const MainSection = () => {
                 <RiShareForwardLine style={{ fontSize: '20px', margin: '5px' }} /> share
               </button>
             </div>
-            <hr style={{ margin: '10px' }}/>
+            <hr style={{ margin: '10px' }} />
             {activeSharePost === post.id && (
               <div className='dropdown-header-3'>
                 <h4>Share this Post on</h4>
                 <p onClick={() => setActiveSharePost(null)}> <IoIosLink /> Copy link</p>
                 <p onClick={() => setActiveSharePost(null)}> <TbArrowsSplit /> Crosspost</p>
                 <p onClick={() => setActiveSharePost(null)}> <IoIosCheckboxOutline /> Embed</p>
+              </div>
+            )}
+            {clickedIconPostId === post.id && (
+              <div className='icon-dropdown'>
+                <p>
+                <MdOutlineSaveAlt style={{
+                 
+                }}/>
+                  Save</p>
+                <p>
+                <GrHide />
+                  Hide</p>
+                <p>
+                <VscReport />
+                  Report</p>
               </div>
             )}
           </div>

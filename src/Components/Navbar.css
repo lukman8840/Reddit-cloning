@@ -86,20 +86,25 @@ img {
     align-items: center;
     cursor: pointer;
 }
-.navbar-icon:hover {
-   
-    border-radius: 10px;
-    background-color: #333;
-}
+
 .navbar-icon { 
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: medium;
     margin: 6px;  
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    min-width: 35px;
+    min-height: 35px;
+    padding: 8px;
+    border-radius: 100px;
+    /* background-color: red; */
   
 }
+.navbar-icon:hover {
+   background-color: #333;
+ }
+
 .navbar-right p {
     justify-content: center;
     align-items: center;
@@ -152,3 +157,46 @@ img {
     color: #777;
   }
   
+
+
+  @media (max-width: 768px) {
+    .navbar {
+        flex-wrap: nowrap;
+        padding: 8px 10px;
+    }
+
+    .navbar-left, .navbar-center, .navbar-right {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .navbar-title{
+        font-size: 14px;
+    }
+
+    .navbar-search {
+        justify-content: center;
+        padding: 2px;
+    }
+
+    .navbar-search-input {
+        flex: 0.4;
+        width: 200px;
+    }
+
+    .navbar-icon {
+        display: none;
+        margin: 4px;
+        min-width: 30px;
+        min-height: 30px;
+    }
+
+    .cart-dropdown {
+        width: 100%;
+        top: auto;
+        right: auto;
+        left: 0;
+        bottom: 0;
+    }
+}

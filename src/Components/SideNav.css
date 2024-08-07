@@ -20,10 +20,11 @@ body {
 }
 
 .sidenav-btn {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   width: 100%;
   padding: 10px;
+  /* background-color: red; */
 }
 
 button {
@@ -36,18 +37,21 @@ button {
   cursor: pointer;
 }
 
+button:hover{
+  background-color: #333;
+}
 .side-nav hr {
   margin: 1em 0.5em;
   border: 1px solid #333;
 }
 
-.sidenav-btn {
+.side-nav-btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.sidenav-btn button {
+.side-nav-btn button {
   display: flex;
   align-items: center;
   background: none;
@@ -59,11 +63,11 @@ button {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.sidenav-btn button:hover {
-  background-color: #494747;
+.side-nav-btn button:hover {
+  background-color: #333;
 }
 
-.sidenav-btn button svg {
+.side-nav-btn button svg {
   margin-right: 50px;
   font-size: 20px;
   margin-bottom: 0px;
@@ -84,32 +88,25 @@ button {
 .dropdown button {
   background: none;
   border: none;
-  padding: 15px;
-  max-width: 200px;
+  padding: 10px;
+  /* max-width: 200px; */
   cursor: pointer;
   font-size: 15px;
   color: #fff;
   transition: background-color 0.3s, color 0.3s;
-  text-transform: uppercase;
   justify-content: space-around;
 }
 
 .dropdown button svg {
-  margin-left: 38px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .dropdown button:hover {
   background-color: #333;
   color: #fff;
-  width: 100%;
-}
-
-.dropdown-content li:hover {
-  background-color: #333;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+  
 }
 
 .copyright {
@@ -123,7 +120,8 @@ button {
 
 .resources {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-left: 5px;
   width: 100%;
 }
 
@@ -136,12 +134,15 @@ button {
       transform: translateX(-100%);
       position: fixed;
       left: 0;
-      top: 0;
+      top: 60px;
+      width: 200px;
+      z-index: 5;
   }
   .side-nav.visible {
       transform: translateX(0);
   }
   .menu-toggle-btn {
       display: block;
+      width: 10px;
   }
 }

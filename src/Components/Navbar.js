@@ -1,3 +1,4 @@
+// Navbar.jsx
 import React, { useState } from 'react';
 import './Navbar.css';
 import { FaReddit, FaSearch, FaBell, FaUserCircle, FaPlus } from 'react-icons/fa';
@@ -14,10 +15,10 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CreatePost from './CreatePost'; 
 
-const Navbar = () => {
+const Navbar = ({ addPost }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isCreatePostVisible, setIsCreatePostVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleProfileClick = () => {
         setIsCartVisible(!isCartVisible);
@@ -28,7 +29,7 @@ const Navbar = () => {
     };
 
     const handleCreatePostClick = () => {
-        setIsCreatePostVisible(!isCreatePostVisible);
+        setIsModalOpen(!isModalOpen);
     };
 
     return (
@@ -51,13 +52,12 @@ const Navbar = () => {
                     <MdAdsClick className='navbar-icon'/>
                     <AiOutlineMessage className='navbar-icon message'/>
                     <p className='navbar-icon' onClick={handleCreatePostClick}>
-                        <FaPlus style={{ fontSize: '15px'}} />
+                        <FaPlus  />
                         <span style={{
-                            fontSize: '20px',
+                            fontSize: 'small',
                             margin: '5px'
                         }}> Create</span>
                     </p>
-                   
                     <FaRegBell className='navbar-icon'/>
                     <FaUserCircle className="navbar-icon user" onClick={handleProfileClick} />
                     <FontAwesomeIcon 
@@ -113,7 +113,7 @@ const Navbar = () => {
                     )}
                 </div>
             </nav>
-            {isCreatePostVisible && <CreatePost />} {/* Conditionally render CreatePost */}
+            {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />} {/* Conditionally render CreatePost */}
         </>
     );
 };
