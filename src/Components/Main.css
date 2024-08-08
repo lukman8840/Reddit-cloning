@@ -189,6 +189,7 @@
         padding: 10px;
         height: auto;
         overflow-y: auto;
+        max-width: 400px;
     }
 
     .header-btn {
@@ -200,22 +201,18 @@
         width: 80px;
         padding: 8px 4px;
     }
-
     .hr {
         width: 100%;
         margin-left: 0px;
     }
-
     .content-header {
         flex-direction: row;
         align-items: flex-start;
         margin: 5px;
     }
-
     .content-main {
         width: 100%;
     }
-
     .content-main h1 {
         font-size: 20px;
         margin: 10px;
@@ -226,12 +223,30 @@
         flex-direction: row;
     }
 
-    .dropdown-header, .dropdown-header-2, .dropdown-header-3, .icon-dropdown {
+    .dropdown-header{
+        width: 20%;
+        left: 20px;
+        top: 110px;
+    }
+
+    .dropdown-header-2{
         width: 20%;
         left: 0;
         right: 0;
+      
     }
 
+    .dropdown-header-3{
+        width: 40%;
+        left: 80%;
+        font-size: 14px;
+        top: 130px;   
+    }
+    .icon-dropdown {
+        width: 20%;
+        left: 0;
+        right: 0;  
+    }
     .post {
         max-width: 100%;
     }

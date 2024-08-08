@@ -25,22 +25,6 @@ const SideNav = () => {
         setShowCustomFeed(true);
     }
 
-    // const buttonStyle = {
-    //     padding: '10px 5px',
-    //     boxSizing: 'border-box',
-    //     width: '100%',
-    //     border: 'none',
-    //     cursor: 'pointer',
-    //     textAlign: 'left',
-    //     fontSize: 'small',
-    //     textTransform: 'Capitalize',
-    //     margin: '6px auto'
-    // };
-
-    // const iconStyle = {
-    //     fontSize: '18px',
-    // };
-
     const Button = styled.button`
         /* background:coral; */
         padding:10px 5px;

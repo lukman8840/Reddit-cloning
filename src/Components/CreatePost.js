@@ -1,48 +1,56 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CreatePost.css';
 import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
 import { FaLink } from 'react-icons/fa';
 import { IoDocumentTextOutline } from 'react-icons/io5';
 import { MdPoll } from 'react-icons/md';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { MyContext } from '../Context/MyContext';
 
-const CreatePost = ({ setIsModalOpen, addPost }) => {
+const CreatePost = ({ onClose }) => {
   const [postType, setPostType] = useState('text');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [url, setUrl] = useState('');
 
+  const { handleAddText } = useContext(MyContext)
+  
+  const navigate = useNavigate(); 
+
   const handlePostTypeChange = (type) => {
     setPostType(type);
-    setContent(''); // Clear content when changing post type
-    setUrl(''); // Clear URL when changing post type
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
+    setContent('');
+    setUrl('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('addPost function', addPost);
-
     const newPost = {
       id: new Date().getTime().toString(),
-      title: title,
+      title,
       selftext: postType === 'text' ? content : url,
       created_utc: Math.floor(Date.now() / 1000),
       num_comments: 0,
       thumbnail: postType === 'image' ? url : ''
     };
+   
+    console.log(newPost)
+    
+    handleAddText(newPost)
 
-    if (typeof addPost === 'function'){
-      addPost(newPost);
-    } else {
-      console.log('addPost is not a function')
-    }
-    setIsModalOpen(false);
+    // if (typeof addText === 'function') {
+    //   addText(newPost);
+    // } else {
+    //   console.log('addText is not a function');
+    // }
+   
+    // if (typeof onClose === 'function') {
+    //   onClose();
+    // } else {
+    //   navigate('/')
+    // }
 
-    // Clear form fields
     setTitle('');
     setContent('');
     setUrl('');
@@ -51,7 +59,7 @@ const CreatePost = ({ setIsModalOpen, addPost }) => {
   return (
     <div className="create-post-wrapper">
       <div className="create-post">
-        <button className="close-btn" onClick={handleClose}>
+        <button className="close-btn" onClick={onClose}>
           <AiOutlineArrowLeft />
         </button>
         <div className="post-type-selector">

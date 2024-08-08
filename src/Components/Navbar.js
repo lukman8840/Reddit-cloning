@@ -113,7 +113,7 @@ const Navbar = ({ addPost }) => {
                     )}
                 </div>
             </nav>
-            {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />} {/* Conditionally render CreatePost */}
+            {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />} 
         </>
     );
 };

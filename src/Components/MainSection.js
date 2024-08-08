@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import './Main.css';
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { MdOutlineViewWeek, MdOutlineEmojiEmotions } from "react-icons/md";
@@ -14,38 +13,18 @@ import { TbArrowsSplit } from "react-icons/tb";
 import { VscReport } from "react-icons/vsc";
 import { GrHide } from "react-icons/gr";
 import CustomFeed from './CustomFeed';
-import CreatePost from './CreatePost';
+import { MyContext } from '../Context/MyContext';
+
 
 const MainSection = () => {
+  const { data: posts} = useContext(MyContext)
+
   const [hoveredButton, setHoveredButton] = useState(null);
-  const [posts, setPosts] = useState([]);
   const [activeSharePost, setActiveSharePost] = useState(null);
   const [selectedOption, setSelectedOption] = useState(false);
   const [voteCounts, setVoteCounts] = useState({});
   const [showCustomFeed, setShowCustomFeed] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [clickedIconPostId, setClickedIconPostId] = useState(null);
-
-  useEffect(() => {
-    // Fetch posts from Reddit API
-    axios.get('https://www.reddit.com/r/reactjs/hot.json')
-      .then(response => {
-        const fetchedPosts = response.data.data.children.map(child => child.data);
-        const initialVoteCounts = {};
-        fetchedPosts.forEach(post => {
-          initialVoteCounts[post.id] = 0; // Initialize vote count for each post
-        });
-        setPosts(fetchedPosts);
-        setVoteCounts(initialVoteCounts);
-      })
-      .catch(error => {
-        console.error("Error fetching data from Reddit API:", error);
-      });
-  }, []);
-
-  const addPost = (newPost) => {
-    setPosts(prevPosts => [newPost, ...prevPosts]);
-  };
 
   const handleClick = (postId) => (event) => {
     event.stopPropagation();
@@ -56,6 +35,7 @@ const MainSection = () => {
     setHoveredButton(button);
   };
 
+  
   const handleMouseLeave = () => {
     setHoveredButton(null);
   };
@@ -68,7 +48,7 @@ const MainSection = () => {
   const incrementVote = (postId) => {
     setVoteCounts(prevVoteCounts => ({
       ...prevVoteCounts,
-      [postId]: prevVoteCounts[postId] + 1
+      [postId]: (prevVoteCounts[postId] || 0) + 1
     }));
   };
 
@@ -76,7 +56,7 @@ const MainSection = () => {
     event.stopPropagation();
     setVoteCounts(prevVoteCounts => ({
       ...prevVoteCounts,
-      [postId]: prevVoteCounts[postId] - 1
+      [postId]: (prevVoteCounts[postId] || 0) - 1
     }));
   };
 
@@ -120,7 +100,6 @@ const MainSection = () => {
   return (
     <div className='main'>
       {showCustomFeed && <CustomFeed onClick={handleCloseFeedClick} />}
-      {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />}
       <div className='header-btn'>
         <button onClick={handleOptionClick}>
           Best {selectedOption === true ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -172,7 +151,7 @@ const MainSection = () => {
                 onClick={() => incrementVote(post.id)}
               >
                 <TiArrowUpOutline style={{ fontSize: '20px' }} />
-                <span style={{ marginLeft: '5px', marginRight: '5px' }}>{voteCounts[post.id]}</span>
+                <span style={{ marginLeft: '5px', marginRight: '5px' }}>{voteCounts[post.id] || 0}</span>
                 <TiArrowDownOutline style={{ fontSize: '20px' }} onClick={(event) => decrementVote(event, post.id)} />
               </button>
               <button
@@ -213,9 +192,7 @@ const MainSection = () => {
             {clickedIconPostId === post.id && (
               <div className='icon-dropdown'>
                 <p>
-                <MdOutlineSaveAlt style={{
-                 
-                }}/>
+                <MdOutlineSaveAlt />
                   Save</p>
                 <p>
                 <GrHide />
