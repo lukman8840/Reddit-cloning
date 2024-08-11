@@ -144,7 +144,7 @@
     color: #fff;
     cursor: pointer;
     top: -5px;
-    right: -100px;
+    right: -200px;
     font-size: larger;
     display: inline-flex;
     align-items: center;
@@ -157,14 +157,15 @@
 }
 
 .icon-dropdown {
-    width: 120px;
+    width: 110px;
     border: none;
     color: #fff;
     cursor: pointer;
     border-radius: 6px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.9);
     z-index: 1;
-    padding: 10px;      
+    padding: 10px;
+    
 }
 
 .icon-dropdown p{
@@ -230,7 +231,13 @@
         padding: 10px;
         height: auto;
         overflow-y: auto;
-        max-width: 400px;
+       width: 100%;
+    }
+    .main-content{
+        position: relative;
+        max-width: 100%px;
+        text-align: justify;
+        margin-left: 0;
     }
 
     .header-btn {

@@ -39,6 +39,7 @@ const Navbar = ({ addPost }) => {
                     </div>
                 </div>
                 <div className="navbar-center">
+                <button className='use'>Use App</button>
                     <div className="navbar-search">
                         <CiSearch className="navbar-search-icon" />
                         <input type="text" placeholder="Search Reddit" className="navbar-search-input" />

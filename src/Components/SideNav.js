@@ -77,9 +77,13 @@ const SideNav = () => {
 
     return (
         <div style={{ backgroundColor: 'red' }}>
-            <button className='menu-toggle-btn' onClick={toggleSideNav}>
-                <IoIosMenu style={{ fontSize: '30px', color: 'white' }} />
-            </button>
+           <button className='menu-toggle-btn' onClick={toggleSideNav}>
+              {isSideNavVisible ? (
+                <IoIosArrowUp style={{ fontSize: '30px', color: 'white' }} />
+                ) : (
+                 <IoIosMenu style={{ fontSize: '30px', color: 'white' }} />
+                 )}
+                </button>
             <div className={`side-nav ${isSideNavVisible ? 'visible' : ''}`}>
                 <div className=''>
                     <StyledNavLink exact to='/'>

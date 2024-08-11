@@ -4,7 +4,9 @@
   padding: 0;
   background-color: #0E1113;
 }
+
 body {
+  height: 100vh;
   background-color: #0E1113;
 }
 
@@ -15,17 +17,17 @@ body {
   background-color: black;
   color: white;
   height: 100vh;
+  margin-bottom: 100px;
   overflow-y: auto;
   position: fixed;
+  left: 0;
   transition: transform 0.3s ease-in-out;
+
 }
 
 .sidenav-btn {
-  /* display: flex; */
-  /* flex-direction: column; */
   width: 100%;
   padding: 10px;
-  /* background-color: red; */
 }
 
 button {
@@ -90,13 +92,13 @@ button:hover{
   background: none;
   border: none;
   padding: 10px;
-  /* max-width: 200px; */
   cursor: pointer;
   font-size: 15px;
   color: #fff;
   transition: background-color 0.3s, color 0.3s;
   justify-content: space-around;
 }
+
 .dropdown button svg {
   align-items: center;
   text-align: center;
@@ -104,8 +106,8 @@ button:hover{
 }
 .dropdown button:hover {
   background-color: #020202;
-  
 }
+
 .copyright {
   padding: 10px;
   text-align: center;
@@ -127,20 +129,28 @@ button:hover{
   display: none;
 }
 
+
+
 @media (max-width: 768px) {
-  .side-nav {
-      transform: translateX(-100%);
-      position: fixed;
-      left: 0;
-      top: 60px;
-      width: 200px;
-      z-index: 5;
-  }
-  .side-nav.visible {
-      transform: translateX(0);
-  }
-  .menu-toggle-btn {
-      display: block;
-      width: 10px;
-  }
+   .side-nav{
+    position: relative;
+    left: -100%;
+    display: block;
+    top: 100;
+    z-index: 5;
+    transform: translateX(-100%);
+   }
+
+   .side-nav.visible{
+    position: fixed;
+    top: 100px;
+    transform: translateX(0);
+   }
+   .menu-toggle-btn{
+    display: block;
+    position:relative;
+    z-index: 10;
+    left: 0;
+    top: 0px;
+   }
 }

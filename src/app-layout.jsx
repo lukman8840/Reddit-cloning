@@ -12,7 +12,7 @@ export const AppLayout = () => {
         </div>
         <div className="sideBar">
     <SideNav />
-    <hr />
+    <Separator />
         </div>
         <div className="outlet">
         
@@ -38,6 +38,11 @@ const Container = styled.div`
     position:absolute;
     left:250px;
     }
+`;
 
-
-`
+const Separator = styled.hr`
+  border: none;
+  border-left: 1px solid #ccc; /* Customize the color */
+  height: 100%;
+  margin: 0;
+`;
