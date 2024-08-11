@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './Main.css';
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { MdOutlineViewWeek, MdOutlineEmojiEmotions } from "react-icons/md";
@@ -10,21 +10,33 @@ import { FaRegRectangleList } from "react-icons/fa6";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLink, IoIosCheckboxOutline } from "react-icons/io";
 import { TbArrowsSplit } from "react-icons/tb";
+import { TbArrowBigUp } from "react-icons/tb";
+import { TbArrowBigDown } from "react-icons/tb";
+import { PiShareFatLight } from "react-icons/pi";
 import { VscReport } from "react-icons/vsc";
 import { GrHide } from "react-icons/gr";
 import CustomFeed from './CustomFeed';
 import { MyContext } from '../Context/MyContext';
+import CreatePost from './CreatePost'; 
+import CommentModal from './CommentModal';
 
 
-const MainSection = () => {
-  const { data: posts} = useContext(MyContext)
-
+const MainSection = (emoji) => {
+  const { data: posts, isModalOpen} = useContext(MyContext)
   const [hoveredButton, setHoveredButton] = useState(null);
   const [activeSharePost, setActiveSharePost] = useState(null);
   const [selectedOption, setSelectedOption] = useState(false);
   const [voteCounts, setVoteCounts] = useState({});
   const [showCustomFeed, setShowCustomFeed] = useState(false);
   const [clickedIconPostId, setClickedIconPostId] = useState(null);
+  const [selectedDropdown, setSelectedDropdowm] = useState();
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 30, left: 550 });
+  const [buttonColor, setButtonColor] = useState('');
+  const [commentModal, setCommentModal] = useState(null);
+  const [currentPostId, setCurrentPostId] = useState(null);
+  const [showEmojis, setShowEmojis] = useState(false);
+
+  const iconRef =useRef(null)
 
   const handleClick = (postId) => (event) => {
     event.stopPropagation();
@@ -40,9 +52,8 @@ const MainSection = () => {
     setHoveredButton(null);
   };
 
-  const handleOptionClick = () => {
-    setSelectedOption(!selectedOption);
-    setActiveSharePost(null);
+  const handleOptionClick = (dropdown) => {
+  setSelectedDropdowm(selectedDropdown === dropdown ? null : dropdown)
   };
 
   const incrementVote = (postId) => {
@@ -71,10 +82,50 @@ const MainSection = () => {
     setShowCustomFeed(false);
   };
 
-  const handleIconClick = (postId) => {
-    setClickedIconPostId(clickedIconPostId === postId ? null : postId);
+  const handleIconClick = (id) => {
+    // Check if the same icon is clicked
+    if (clickedIconPostId === id) {
+      // If the same icon is clicked, toggle the dropdown visibility
+      setClickedIconPostId(null);
+    } else {
+      // If a different icon is clicked, show the dropdown
+      if (iconRef.current) {
+        const { top, left, height } = iconRef.current.getBoundingClientRect();
+        setDropdownPosition({ top: top + height, left: left });
+      }
+      setClickedIconPostId(id);
+    }
   };
 
+
+  const handleCommentIconClick = (postId, event) => {
+    if (event && event.target) {
+      const iconRect = event.target.getBoundingClientRect();
+      setCommentModal({ top: iconRect.top, left: iconRect.left });
+      setCurrentPostId(postId);
+      setCommentModal(true);
+    } else {
+      console.error("Event or event.target is undefined");
+    }
+  };
+
+  const handleCommentSubmit = (comment) => {
+    console.log(`Comment for post ${currentPostId}: ${comment}`)
+    setCommentModal(false)
+    setCurrentPostId(null)
+  };
+
+  const handleCloseModal = () => {
+    setCommentModal(false);
+    setCurrentPostId(null)
+  }
+
+  const handleUpClick = () => {
+    setButtonColor('red')
+  }
+  const handleDownClick = () => {
+    setButtonColor('green')
+  }
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
     return () => {
@@ -82,9 +133,23 @@ const MainSection = () => {
     };
   }, []);
 
+  const timeAgo = (timestamp) => {
+    const now = new Date();
+    const postDate = new Date(timestamp * 1000);
+    const diffInHours = Math.floor((now - postDate) / (1000 * 60 * 60));
+
+    if(diffInHours < 1) {
+      return "Just now";
+    } else if (diffInHours === 1){
+      return "1 hr ago";
+    } else {
+      return `${diffInHours} hrs ago`
+    }
+  };
+
   const buttonStyle = (button) => ({
     width: '100px',
-    backgroundColor: hoveredButton === button ? '#333' : '#333',
+    backgroundColor: '#2A3236',
     border: 'none',
     padding: '0px 8px',
     borderRadius: '10px',
@@ -98,15 +163,16 @@ const MainSection = () => {
   });
 
   return (
-    <div className='main'>
+    <>
+     <div className=''>
       {showCustomFeed && <CustomFeed onClick={handleCloseFeedClick} />}
       <div className='header-btn'>
-        <button onClick={handleOptionClick}>
-          Best {selectedOption === true ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        <button onClick={() => handleOptionClick('Best')}>
+          Best {selectedDropdown === 'Best' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
-        {selectedOption === true && (
+        {selectedDropdown === 'Best' && (
           <div className='dropdown-header'>
-            <p onClick={() => handleOptionClick('Best')}>Sort By</p>
+            <p onClick={() => handleOptionClick('SortBy')}>Sort By</p>
             <p onClick={() => handleOptionClick('Best')}>Best</p>
             <p onClick={() => handleOptionClick('Hot')}>Hot</p>
             <p onClick={() => handleOptionClick('New')}>New</p>
@@ -116,12 +182,12 @@ const MainSection = () => {
         )}
         <button onClick={() => handleOptionClick('Box')}>
           <MdOutlineViewWeek />
-          {selectedOption === 'Box' ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          {selectedOption === 'Box' && (
+          {selectedDropdown === 'Box' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          {selectedDropdown === 'Box' && (
             <div className='dropdown-header-2'>
-              <h4 onClick={() => handleOptionClick('view')}>View</h4>
-              <p onClick={() => handleOptionClick('card')}> <FiCreditCard /> Card</p>
-              <p onClick={() => handleOptionClick('compact')}> <FaRegRectangleList /> Compact</p>
+              <h4 onClick={() => handleOptionClick('View')}>View</h4>
+              <p onClick={() => handleOptionClick('Card')}> <FiCreditCard /> Card</p>
+              <p onClick={() => handleOptionClick('Compact')}> <FaRegRectangleList /> Compact</p>
             </div>
           )}
         </button>
@@ -133,10 +199,11 @@ const MainSection = () => {
             <div className='content-header'>
               <img src={post.thumbnail} alt='Header' />
               <p className='paragraph'>{post.title} &bull;</p>
-              <span className='time'>{new Date(post.created_utc * 1000).toLocaleTimeString()}</span>
+              <span className='time'>{timeAgo(post.created_utc)}</span>
               <HiOutlineDotsHorizontal
                 className='icon-hover'
                 onClick={() => handleIconClick(post.id)}
+                ref={iconRef}
               />
             </div>
             <div className='content-main'>
@@ -150,17 +217,23 @@ const MainSection = () => {
                 onMouseLeave={handleMouseLeave}
                 onClick={() => incrementVote(post.id)}
               >
-                <TiArrowUpOutline style={{ fontSize: '20px' }} />
+                <TbArrowBigUp  style={{ fontSize: '20px', backgroundColor: '#2A3236' }} 
+                  onClick={handleUpClick}
+                />
                 <span style={{ marginLeft: '5px', marginRight: '5px' }}>{voteCounts[post.id] || 0}</span>
-                <TiArrowDownOutline style={{ fontSize: '20px' }} onClick={(event) => decrementVote(event, post.id)} />
+                <TbArrowBigDown  style={{ fontSize: '20px', backgroundColor: '#2A3236' }} 
+                onClick={(event) => decrementVote(event, post.id)} 
+                  
+                  />
               </button>
               <button
                 className='comments'
                 style={buttonStyle('comments')}
                 onMouseEnter={() => handleMouseEnter('comments')}
                 onMouseLeave={handleMouseLeave}
+                onClick={(event) => handleCommentIconClick(post.id, event)}
               >
-                <FaRegMessage style={{ fontSize: '16px', margin: '5px' }} /> {post.num_comments}
+                <FaRegMessage style={{ fontSize: '16px', margin: '5px', backgroundColor: '#2A3236' }} /> {post.num_comments}
               </button>
               <button
                 className='comments'
@@ -168,8 +241,10 @@ const MainSection = () => {
                 onMouseEnter={() => handleMouseEnter('emojis')}
                 onMouseLeave={handleMouseLeave}
               >
-                <MdOutlineEmojiEmotions />
+                <MdOutlineEmojiEmotions style={{ backgroundColor: '#2A3236'}} />
               </button>
+            
+              )}
               <button
                 className='comments'
                 style={buttonStyle('share')}
@@ -177,10 +252,10 @@ const MainSection = () => {
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClick(post.id)}
               >
-                <RiShareForwardLine style={{ fontSize: '20px', margin: '5px' }} /> share
+                <PiShareFatLight  style={{ fontSize: '20px', margin: '5px', backgroundColor: '#2A3236' }} /> share
               </button>
             </div>
-            <hr style={{ margin: '10px' }} />
+            <hr style={{ margin: '10px', width: '75%', color: '#333' }} />
             {activeSharePost === post.id && (
               <div className='dropdown-header-3'>
                 <h4>Share this Post on</h4>
@@ -189,8 +264,16 @@ const MainSection = () => {
                 <p onClick={() => setActiveSharePost(null)}> <IoIosCheckboxOutline /> Embed</p>
               </div>
             )}
-            {clickedIconPostId === post.id && (
-              <div className='icon-dropdown'>
+            
+      {clickedIconPostId === post.id && (
+        <div
+          className='icon-dropdown'
+          style={{
+            top: dropdownPosition.top,
+            left: dropdownPosition.left,
+            position: 'absolute'
+          }}
+        >
                 <p>
                 <MdOutlineSaveAlt />
                   Save</p>
@@ -206,6 +289,17 @@ const MainSection = () => {
         ))}
       </div>
     </div>
+
+
+    {isModalOpen && <CreatePost />} 
+    <CommentModal 
+      postId={currentPostId}
+      isVisible={commentModal}
+      onClose={handleCloseModal}
+      onSubmit={handleCommentSubmit}
+    />
+
+    </>
   );
 };
 

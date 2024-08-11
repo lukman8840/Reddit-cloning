@@ -1,33 +1,23 @@
-import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SideNav from './Components/SideNav';
 import Main from './Components/MainSection';
-import Navbar from './Components/Navbar';
-import { MyProvider, MyContext } from './Context/MyContext';
-
+import { MyProvider } from './Context/MyContext';
+import { AppLayout } from './app-layout';
+import { Popular } from './Components/Popular';
+import { All } from './Components/All';
+import { Explore } from './Components/Explore';
 
 function App() {
-  
-  
   return (
     <MyProvider>
       <Router>
-        <div className="App">
-          <Navbar  />
-          <hr />
-          <div className="layout">
-            <SideNav />
-            <div className="divider"></div>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main />
-                }
-              />
-            </Routes>
-          </div>
-        </div>
+          <Routes>
+           <Route path="/" element={<AppLayout />}> 
+           <Route index element={<Main />} />
+           <Route path="popular" element={<Popular />} />
+           <Route path="explore" element={<Explore />} />
+           <Route path="all" element={<All />} />
+           </Route>
+          </Routes>
       </Router>
     </MyProvider>
   );

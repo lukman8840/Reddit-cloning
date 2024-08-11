@@ -6,10 +6,15 @@ export const MyContext = createContext();
 export const MyProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [voteCounts, setVoteCounts] = useState({});
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleAddText = (newPost) => {
     setData([...data, newPost]);
     
+}
+
+const toggleModal = () => {
+    setIsModalOpen(prevState => !prevState)
 }
 
   useEffect(() => {
@@ -40,7 +45,13 @@ export const MyProvider = ({ children }) => {
   // }}
 
   const exportValues = {
-    data, setData, voteCounts, setVoteCounts, handleAddText
+              data, 
+              setData, 
+              voteCounts, 
+              setVoteCounts, 
+              handleAddText,
+              toggleModal,
+              isModalOpen
   }
   return (
     <MyContext.Provider value={exportValues }>

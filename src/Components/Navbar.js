@@ -1,7 +1,7 @@
-// Navbar.jsx
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { FaReddit, FaSearch, FaBell, FaUserCircle, FaPlus } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CiSearch } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -12,25 +12,21 @@ import { PiBag } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TbPremiumRights } from "react-icons/tb";
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CreatePost from './CreatePost'; 
+import { MyContext } from '../Context/MyContext';
 
 const Navbar = ({ addPost }) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const { toggleModal } = useContext(MyContext);
     const handleProfileClick = () => {
         setIsCartVisible(!isCartVisible);
     };
-
+    
     const handleDarkModeClick = () => {
         setIsDarkMode(!isDarkMode);
     };
-
-    const handleCreatePostClick = () => {
-        setIsModalOpen(!isModalOpen);
-    };
+    
+   
 
     return (
         <>
@@ -51,7 +47,7 @@ const Navbar = ({ addPost }) => {
                 <div className="navbar-right">
                     <MdAdsClick className='navbar-icon'/>
                     <AiOutlineMessage className='navbar-icon message'/>
-                    <p className='navbar-icon' onClick={handleCreatePostClick}>
+                    <p className='navbar-icon' onClick={toggleModal}>
                         <FaPlus  />
                         <span style={{
                             fontSize: 'small',
@@ -113,7 +109,6 @@ const Navbar = ({ addPost }) => {
                     )}
                 </div>
             </nav>
-            {isModalOpen && <CreatePost setIsModalOpen={setIsModalOpen} addPost={addPost} />} 
         </>
     );
 };

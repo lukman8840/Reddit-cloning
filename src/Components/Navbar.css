@@ -3,7 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 20px;
+    background-color: #0E1113;
     color: #fff;
+    width: 100%;
 }
 
 img {
@@ -64,14 +66,14 @@ img {
 .navbar-search {
     display: flex;
     align-items: center;
-    background-color: #333;
+    background-color: #2A3236;
     border-radius: 14px;
-    padding: 5px 10px;
+    padding: 5px 8px;
 }
 .navbar-search-icon {
     font-size: 20px;
     margin-right: 0px;
-    background-color: #333;
+    background-color: #2A3236;
 }
 .navbar-search-input {
     padding: 8px;
@@ -102,7 +104,7 @@ img {
   
 }
 .navbar-icon:hover {
-   background-color: #333;
+   background-color: #000;
  }
 
 .navbar-right p {
@@ -118,15 +120,16 @@ img {
 }
 
 .cart-dropdown {
-    background-color: #333;
+    background-color: #0E1113;
     border-radius: 10px;
+    border: 1px solid #333;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 50px; 
+    top: 60px; 
     right: 0;  
     width: 250px; 
-    z-index: 1000;
+    z-index: 1;
   }
   
   .cart-dropdown ul {

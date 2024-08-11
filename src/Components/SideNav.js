@@ -6,6 +6,10 @@ import { IoIosArrowDown, IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { FaAward, FaBlogger, FaBriefcase, FaBullhorn, FaFileAlt, FaLock, FaFileContract, FaUsers, FaInfoCircle, FaNewspaper, FaQuestionCircle, FaRegStar, FaTags } from 'react-icons/fa';
 import styled from 'styled-components';
+import { PiArrowCircleUpRight } from "react-icons/pi";
+import { MdOutlineExplore } from "react-icons/md";
+import { PiCircleHalfTiltLight } from "react-icons/pi";
+import { NavLink } from 'react-router-dom';
 import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const SideNav = () => {
@@ -42,7 +46,34 @@ const SideNav = () => {
         &:hover{
             background-color: '#333';
         }
-    `
+    `;
+
+    const StyledNavLink = styled(NavLink)`
+    display: block;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    width: 95%;
+    border: none;
+    margin: 6px auto;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none; // Remove underline for links
+    color: inherit; // Use inherited color or set a default color
+
+    svg {
+        margin: 0px 5px;
+        font-size: medium;
+    }
+
+    &.active {
+        background-color: #000; 
+        color: #fff;
+    }
+
+    &:hover {
+        background-color: #000; 
+    }
+`;
 
     return (
         <div style={{ backgroundColor: 'red' }}>
@@ -51,10 +82,18 @@ const SideNav = () => {
             </button>
             <div className={`side-nav ${isSideNavVisible ? 'visible' : ''}`}>
                 <div className=''>
-                    <Button><TiHome /> Home</Button>
-                    <Button><TiStar /> Popular</Button>
-                    <Button><TiCompass /> Explore</Button>
-                    <Button><TiThList /> All</Button>
+                    <StyledNavLink exact to='/'>
+                        <TiHome /> Home
+                    </StyledNavLink>
+                    <StyledNavLink exact to='/popular'>
+                    <PiArrowCircleUpRight /> Popular
+                    </StyledNavLink>
+                    <StyledNavLink exact to='/explore'>
+                    <MdOutlineExplore /> Explore
+                    </StyledNavLink>
+                    <StyledNavLink exact to='/all'>
+                        <PiCircleHalfTiltLight /> All
+                    </StyledNavLink>
                 </div>
                 <hr />
                 <div className='drop-btn'>

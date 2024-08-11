@@ -2,20 +2,21 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: #0E1113;
 }
-
 body {
-  background-color: black;
+  background-color: #0E1113;
 }
 
 .side-nav {
-  width: 250px;
+  width: 257px;
   font-size: small;
   box-shadow: 2px 0px 1px #f4f5fa;
   background-color: black;
   color: white;
   height: 100vh;
   overflow-y: auto;
+  position: fixed;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -38,11 +39,11 @@ button {
 }
 
 button:hover{
-  background-color: #333;
+  background-color: #000000;
 }
 .side-nav hr {
   margin: 1em 0.5em;
-  border: 1px solid #333;
+  border: 1px solid #fff;
 }
 
 .side-nav-btn {
@@ -64,7 +65,7 @@ button:hover{
 }
 
 .side-nav-btn button:hover {
-  background-color: #333;
+  background-color: #050505;
 }
 
 .side-nav-btn button svg {
@@ -96,19 +97,15 @@ button:hover{
   transition: background-color 0.3s, color 0.3s;
   justify-content: space-around;
 }
-
 .dropdown button svg {
   align-items: center;
   text-align: center;
   justify-content: center;
 }
-
 .dropdown button:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: #020202;
   
 }
-
 .copyright {
   padding: 10px;
   text-align: center;
@@ -116,6 +113,7 @@ button:hover{
   color: #aaa;
   text-decoration: underline;
   cursor: pointer;
+  margin-top: 120px;
 }
 
 .resources {

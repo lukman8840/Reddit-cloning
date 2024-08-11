@@ -1,5 +1,9 @@
 body{
-  background-color: black;
+  background-color: #0E1113;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+
 }
 .App {
   display: flex;

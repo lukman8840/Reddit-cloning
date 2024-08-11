@@ -8,13 +8,13 @@ import { MdPoll } from 'react-icons/md';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { MyContext } from '../Context/MyContext';
 
-const CreatePost = ({ onClose }) => {
+const CreatePost = () => {
   const [postType, setPostType] = useState('text');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [url, setUrl] = useState('');
 
-  const { handleAddText } = useContext(MyContext)
+  const { handleAddText, toggleModal } = useContext(MyContext);
   
   const navigate = useNavigate(); 
 
@@ -38,7 +38,7 @@ const CreatePost = ({ onClose }) => {
     console.log(newPost)
     
     handleAddText(newPost)
-
+    toggleModal()
     // if (typeof addText === 'function') {
     //   addText(newPost);
     // } else {
@@ -59,7 +59,7 @@ const CreatePost = ({ onClose }) => {
   return (
     <div className="create-post-wrapper">
       <div className="create-post">
-        <button className="close-btn" onClick={onClose}>
+        <button className="close-btn" onClick={toggleModal}>
           <AiOutlineArrowLeft />
         </button>
         <div className="post-type-selector">
