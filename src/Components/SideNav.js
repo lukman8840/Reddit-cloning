@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SideNav.css';
 import CustomFeed from './CustomFeed'
-import { TiHome, TiStar, TiCompass, TiThList } from 'react-icons/ti';
+import { TiHome } from 'react-icons/ti';
 import { IoIosArrowDown, IoIosArrowUp, IoIosMenu } from "react-icons/io";
 import { GoPlus } from "react-icons/go";
 import { FaAward, FaBlogger, FaBriefcase, FaBullhorn, FaFileAlt, FaLock, FaFileContract, FaUsers, FaInfoCircle, FaNewspaper, FaQuestionCircle, FaRegStar, FaTags } from 'react-icons/fa';
