@@ -132,23 +132,23 @@ button:hover{
 
 
 @media (max-width: 768px) {
-   .side-nav{
-    position: relative;
-    left: -100%;
+   .side-nav{ 
+    /* position: absolute; */
     display: block;
     top: 100;
     z-index: 5;
+    background:red;
     transform: translateX(-100%);
    }
 
    .side-nav.visible{
-    position: fixed;
+    /* position: fixed; */
     top: 100px;
     transform: translateX(0);
    }
    .menu-toggle-btn{
     display: block;
-    position:relative;
+    /* position:relative; */
     z-index: 10;
     left: 0;
     top: 0px;

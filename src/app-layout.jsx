@@ -24,12 +24,16 @@ export const AppLayout = () => {
 }
 
 const Container = styled.div`
-    // display:grid;
-    // grid-template-columns: 1fr 1fr 1fr;
+     //display:grid;
+     //grid-template-columns: 1fr 1fr 1fr;
     // grid-template-rows: 80px 80vh ;
     position:relative;
+
+    background:coral !important;
     .sideBar{
-    position:absolute
+    position:absolute;
+    left: -100px;
+    background: red;
     }
     .outlet{
     
@@ -42,7 +46,7 @@ const Container = styled.div`
 
 const Separator = styled.hr`
   border: none;
-  border-left: 1px solid #ccc; /* Customize the color */
+  border-left: 1px solid #ccc; 
   height: 100%;
   margin: 0;
 `;

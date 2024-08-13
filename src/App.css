@@ -47,45 +47,34 @@ hr{
   border: 1px solid #333;
 }
 
-/* For tablets and larger devices */
+/* Global Light Mode Styling */
+.light-mode {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #e0e0e0;
+}
+
+body.light-mode, .light-mode .navbar, .light-mode .sidebar, .light-mode .main-content {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.light-mode .navbar {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.light-mode .sidebar {
+  border-right: 1px solid var(--border-color);
+}
+
+.light-mode .main-content {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+
 @media (max-width: 1024px) {
   .SideNav {
-    width: 200px; /* Reduce the width of the sidebar on smaller screens */
-  }
-}
-
-/* For mobile devices */
-@media (max-width: 768px) {
-  .SideNav {
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .SideNav.visible {
-    transform: translateX(0);
-  }
-
-  .main {
-    margin-left: 0;
-  }
-  
-  .divider {
-    display: none; /* Hide the divider on small screens */
-  }
-}
-
-/* For very small mobile devices */
-@media (max-width: 480px) {
-  .Navbar {
-    padding: 5px; /* Adjust padding on smaller screens */
-  }
-
-  .main {
-    padding: 10px; /* Adjust padding in the main content area */
+    width: 200px; 
   }
 }

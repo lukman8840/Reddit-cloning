@@ -10,6 +10,7 @@ import { PiArrowCircleUpRight } from "react-icons/pi";
 import { MdOutlineExplore } from "react-icons/md";
 import { PiCircleHalfTiltLight } from "react-icons/pi";
 import { NavLink } from 'react-router-dom';
+import { LiaTimesSolid } from "react-icons/lia";
 import { width } from '@fortawesome/free-solid-svg-icons/fa0';
 
 const SideNav = () => {
@@ -76,10 +77,10 @@ const SideNav = () => {
 `;
 
     return (
-        <div style={{ backgroundColor: 'red' }}>
+        <div style={{}}>
            <button className='menu-toggle-btn' onClick={toggleSideNav}>
               {isSideNavVisible ? (
-                <IoIosArrowUp style={{ fontSize: '30px', color: 'white' }} />
+                <LiaTimesSolid  style={{ fontSize: '30px', color: 'white' }} />
                 ) : (
                  <IoIosMenu style={{ fontSize: '30px', color: 'white' }} />
                  )}

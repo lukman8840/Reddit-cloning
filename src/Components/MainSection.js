@@ -245,6 +245,7 @@ const MainSection = (emoji) => {
               </button>
             
               )}
+              
               <button
                 className='comments'
                 style={buttonStyle('share')}
